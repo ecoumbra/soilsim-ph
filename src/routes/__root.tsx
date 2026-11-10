@@ -14,21 +14,27 @@ import { Toaster } from "@/components/ui/sonner";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
+const SITE_URL = "https://ecoumbra.github.io/soilsim-ph/";
+const SITE_NAME = "SoilSim";
+const SITE_TITLE = "SoilSim v2.0: Інтерактивний симулятор кислотності ґрунтів";
+const SITE_DESCRIPTION =
+  "Теорія, віртуальна лабораторія за ДСТУ, калькулятор вапнування та генератор практичних завдань з ґрунтознавства.";
+
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
+        <h2 className="mt-4 text-xl font-semibold text-foreground">Сторінку не знайдено</h2>
         <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
+          Такої сторінки не існує або її було переміщено.
         </p>
         <div className="mt-6">
           <Link
             to="/"
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Go home
+            На головну
           </Link>
         </div>
       </div>
@@ -47,10 +53,10 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
+          Сторінка не завантажилась
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
+          Сталася помилка. Спробуйте оновити сторінку або поверніться на головну.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
@@ -60,13 +66,13 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
             }}
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Try again
+            Спробувати ще раз
           </button>
           <a
-            href="/soilsim-ph/" // ЗМІНЕНО (було "/")
+            href="/soilsim-ph/"
             className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
           >
-            Go home
+            На головну
           </a>
         </div>
       </div>
@@ -79,20 +85,39 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Симулятор кислотності ґрунтів" },
-      { name: "description", content: "Навчальний симулятор кислотності ґрунтів" },
+      { title: SITE_TITLE },
+      { name: "description", content: SITE_DESCRIPTION },
+      { name: "author", content: "Володимир Нікорич" },
+      { name: "robots", content: "index, follow" },
+      { name: "theme-color", content: "#059669" },
+
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
+      { property: "og:site_name", content: SITE_NAME },
+      { property: "og:locale", content: "uk_UA" },
+      { property: "og:url", content: SITE_URL },
+      { property: "og:title", content: SITE_TITLE },
+      { property: "og:description", content: SITE_DESCRIPTION },
+
+      { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: SITE_TITLE },
+      { name: "twitter:description", content: SITE_DESCRIPTION },
+
+      // Щоб у соцмережах з'являлась картинка: покладіть файл public/og-image.png
+      // (1200x630), розкоментуйте три рядки нижче, а "summary" вище змініть
+      // на "summary_large_image".
+      // { property: "og:image", content: "https://ecoumbra.github.io/soilsim-ph/og-image.png" },
+      // { property: "og:image:width", content: "1200" },
+      // { property: "og:image:height", content: "630" },
     ],
     links: [
+      { rel: "stylesheet", href: appCss },
+      { rel: "canonical", href: SITE_URL },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
       {
         rel: "stylesheet",
-        href: appCss,
+        href: "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&family=Lora:wght@500;600&display=swap&subset=cyrillic",
       },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&family=Lora:wght@500;600&display=swap&subset=cyrillic" },
-      { rel: "icon", href: "/soilsim-ph/favicon.ico", type: "image/x-icon" }, // ЗМІНЕНО (було "/favicon.ico")
+      { rel: "icon", href: "/soilsim-ph/favicon.ico", type: "image/x-icon" },
     ],
   }),
   shellComponent: RootShell,
