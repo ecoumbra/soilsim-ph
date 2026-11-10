@@ -1,16 +1,13 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
-  nitro: {
-    preset: "github_pages",
-  },
   tanstackStart: {
-    prerender: {
+    spa: {
       enabled: true,
-      autoStaticPathsDiscovery: true,
-      autoSubfolderIndex: true,
-      crawlLinks: true,
-      failOnError: false,
+      prerender: {
+        outputPath: "/index.html",
+        crawlLinks: true,
+      },
     },
   },
   vite: {

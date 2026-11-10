@@ -7,11 +7,9 @@ export const getRouter = () => {
 
   const router = createRouter({
     routeTree,
-    basepath: "/soilsim-ph",
-    context: { queryClient },
     scrollRestoration: true,
-    defaultPreloadStaleTime: 0,
-  });
+    basepath: "/soilsim-ph",
+    });
 
   return router;
 };
