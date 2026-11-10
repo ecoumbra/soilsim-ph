@@ -15,19 +15,5 @@ export default defineConfig({
   },
   vite: {
     base: "/soilsim-ph/",
-    plugins: [
-      {
-        name: "disable-nitro-ssr-build",
-        config(userConfig, { command }) {
-          if (command === "build") {
-            return {
-              build: {
-                ssr: false,
-              },
-            };
-          }
-        },
-      },
-    ],
   },
 });
