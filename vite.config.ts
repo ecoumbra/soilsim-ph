@@ -4,6 +4,7 @@ export default defineConfig({
   // Presets Nitro для статичного розгортання на GitHub Pages
   nitro: {
     preset: "github_pages",
+    server: false, // <--- Вимикає SSR-серверний бандл для чисто статичного деплою
   },
 
   // Налаштування пререндерингу TanStack Start
